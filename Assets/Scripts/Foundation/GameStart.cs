@@ -7,13 +7,10 @@ using DG.Tweening;
 
 public class GameStart : MonoBehaviour
 {
-
-	
 	public GameObject players;
 	public GameObject deliever;
 	public GameObject block1;
 	public GameObject block2;
-
 
 	public GameObject introduction;
 	public GameObject tip;

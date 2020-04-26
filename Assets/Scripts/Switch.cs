@@ -35,7 +35,7 @@ public class Switch : MonoBehaviour
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.tag == "Charging" && collision.transform.GetComponent<Collider2D>().isTrigger == false)
+		if (collision.tag == "Charging")
 		{
 			this.SwapSprite();
 			receiver.SendMessage("SwitchOff");

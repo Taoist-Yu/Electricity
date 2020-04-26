@@ -5,7 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
 	private Animator animator;
-	private Collider2D collider;
+	private Collider2D coll;
 
 	private GameObject upDoor;
 	private GameObject downDoor;
@@ -13,7 +13,7 @@ public class Door : MonoBehaviour
 	private void Awake()
 	{
 		animator = GetComponent<Animator>();
-		collider = GetComponent<Collider2D>();
+		coll = GetComponent<Collider2D>();
 
 		upDoor = transform.Find("UpDoor").gameObject;
 		downDoor = transform.Find("DownDoor").gameObject;
@@ -27,12 +27,18 @@ public class Door : MonoBehaviour
 
 	private void SwitchOff()
 	{
-		//animator.SetBool("IsOpen", false);
+		ClipPlayer.Instance.Play(ClipPlayer.Instance.open);
+		animator.SetBool("IsOpen", false);
 	}
 
-	private void DestorySelf()
+	private void Disable()
 	{
-		Destroy(gameObject);
+		coll.enabled = false;
+	}
+
+	private void Enable()
+	{
+		coll.enabled = true;
 	}
 
 }

@@ -15,4 +15,46 @@ public class ChargingPile : MonoBehaviour
 			return isStatic;
 		}
 	}
+
+	#region MonoBehaviour
+
+	private void Awake()
+	{
+		
+	}
+
+	private void Update()
+	{
+		this.CheckBelt();
+	}
+
+	#endregion
+
+	#region private Method
+
+	private void CheckBelt()
+	{
+		//向下射线检测
+		RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.down);
+		//遍历检测结果，查找其中是否由传送带
+		Belt belt = null;
+		foreach(var hit in hits)
+		{
+			GameObject go = hit.transform.gameObject;
+			belt = go.GetComponent<Belt>();
+			if(belt != null)
+			{
+				break;
+			}
+		}
+		//应用传送带效果
+		if(belt != null)
+		{
+			float speed = belt.Speed;
+			transform.Translate(speed * Vector3.right * Time.deltaTime);
+		}
+	}
+
+	#endregion
+
 }

@@ -34,6 +34,7 @@ namespace Player
 		private static bool isLinked;
 
 		private GameObject playerRenderer;
+		private SpriteRenderer spriteRenderer;
 
 		#endregion
 
@@ -43,6 +44,7 @@ namespace Player
 		{
 			this.player = gameObject.GetComponent<Player>();
 			this.playerRenderer = transform.Find("PlayerRenderer").gameObject;
+			this.spriteRenderer = playerRenderer.GetComponent<SpriteRenderer>();
 		}
 
 		private void Start()
@@ -146,8 +148,13 @@ namespace Player
 
 		#region 血量相关
 
+		private static float alpha;
+
 		private void HeartUpdate()
 		{
+			spriteRenderer.color = new Color(spriteRenderer.color.r,
+				spriteRenderer.color.g, spriteRenderer.color.b, alpha);
+
 			if (player.PlayerID == 2)
 				return;
 
@@ -163,6 +170,9 @@ namespace Player
 					this.Death();
 				}
 			}
+
+			alpha = 0.2f + 0.8f * Mathf.Max(heart, 0) / lifeTime;
+
 		}
 
 		private void Death()

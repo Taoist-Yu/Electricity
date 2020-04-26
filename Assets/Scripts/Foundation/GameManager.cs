@@ -53,14 +53,19 @@ public class GameManager : MonoBehaviour
 
 	private void EndLevelMask()
 	{
+		//选关跳转
+		if (PlayScene.Instance.isSelectLevel)
+		{
+			PlayScene.Instance.isSelectLevel = false;
+			SceneManager.LoadScene(0);
+		}
 		//带开始界面的第一关转化成不带开始界面的第一关
-		if (currentLevel == 1)
+		if (currentLevel == 2)
 		{
 			++currentLevel;
 		}
 		if (PlayScene.Instance.isOver)
 		{
-
 			SceneManager.LoadScene(0);
 		}
 		else if (PlayScene.Instance.isFinished)

@@ -15,6 +15,7 @@ class PlayScene : MonoBehaviour
 
 	public bool isOver = false;
 	public bool isFinished = false;
+	public bool isSelectLevel = false;
 
 	private bool[] isPlayerFinished = { false, false };
 

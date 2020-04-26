@@ -8,6 +8,10 @@ public class LevelTransfer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		if(GameManager.Instance.currentLevel == SceneManager.GetActiveScene().buildIndex)
+		{
+			GameManager.Instance.currentLevel = 1;
+		}
 		SceneManager.LoadScene(GameManager.Instance.currentLevel);
     }
 

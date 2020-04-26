@@ -23,7 +23,7 @@ public class LevelMask : MonoBehaviour
     {
 		Transform dtrans = transform.Find("Sprite_down");
 		Transform utrans = transform.Find("Sprite_up");
-		if (PlayScene.Instance.isOver || PlayScene.Instance.isFinished)
+		if (PlayScene.Instance.isOver || PlayScene.Instance.isFinished || PlayScene.Instance.isSelectLevel)
 		{
 			dtrans.gameObject.SetActive(true);
 		}
