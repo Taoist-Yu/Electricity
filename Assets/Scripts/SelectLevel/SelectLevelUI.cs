@@ -25,12 +25,12 @@ class SelectLevelUI : MonoBehaviour
 		current_panel = panel;
 	}
 
-	public void OpenLevel(int level_id)
+	/*public void OpenLevel(int level_id)
 	{
 		PlayScene.Instance.isSelectLevel = true;
 		GameManager.Instance.currentLevel = level_id;
 		GameManager.Instance.LoadScene();
-	}
+	}*/
 
 	private void CloseCurrent()
 	{

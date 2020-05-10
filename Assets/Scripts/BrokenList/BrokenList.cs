@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BrokenList : MonoBehaviour
 {
-	[SerializeField]//测试用
+	//[SerializeField]//测试用
 	private List<BrokenNode> brokenList = new List<BrokenNode>();
 
 	[SerializeField]
@@ -13,15 +13,12 @@ public class BrokenList : MonoBehaviour
 
 	private void Awake()
 	{
-		for(int i = 0; i < transform.childCount; i++)
-		{
-			BrokenNode node = transform.GetChild(i).GetComponent<BrokenNode>();
-			if(node.GetComponent<BrokenNode>() != null)
-			{
-				brokenList.Add(node);
-			}
-			
-		}
+		this.GenList();
+	}
+
+	private void Start()
+	{
+		StartCoroutine(Broke());
 	}
 
 	private void SwitchOn()
@@ -45,6 +42,22 @@ public class BrokenList : MonoBehaviour
 		yield return null;
 	}
 
+	private void GenList()
+	{
+		for (int i = 0; i < transform.childCount; i++)
+		{
+			BrokenNode node = transform.GetChild(i).GetComponent<BrokenNode>();
+			if (node.GetComponent<BrokenNode>() != null)
+			{
+				brokenList.Add(node);
+			}
+		}
+	}
+
+	private void OnDrawGizmos()
+	{
+		
+	}
 
 
 }

@@ -30,12 +30,16 @@ class ClockNode : MonoBehaviour
 		gameObject.SetActive(true);
 		this.state = State.starting;
 		rate = 0.0f;
+
+		sprite_material.SetFloat("_Rate", rate);
 	}
 
 	public void Disable()
 	{
 		this.state = State.closing;
 		rate = 1.0f;
+
+		sprite_material.SetFloat("_Rate", rate);
 	}
 	#endregion
 
@@ -44,12 +48,13 @@ class ClockNode : MonoBehaviour
 	{
 		this.spriteRenderer = GetComponent<SpriteRenderer>();
 		this.sprite_material = spriteRenderer.material;
+		rate = 1.0f;
+		state = State.running;
 	}
 
 	private void Start()
 	{
-		state = State.running;
-		rate = 1.0f;
+		
 	}
 
 	private void Update()

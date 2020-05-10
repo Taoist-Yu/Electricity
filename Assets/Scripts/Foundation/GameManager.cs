@@ -60,9 +60,9 @@ public class GameManager : MonoBehaviour
 			SceneManager.LoadScene(0);
 		}
 		//带开始界面的第一关转化成不带开始界面的第一关
-		if (currentLevel == 2)
+		if (currentLevel == 1)
 		{
-			++currentLevel;
+			currentLevel = 3;
 		}
 		if (PlayScene.Instance.isOver)
 		{

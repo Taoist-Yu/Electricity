@@ -8,6 +8,8 @@ public class Clock : MonoBehaviour
 	private int broken_cot;
 	[Header("状态切换时间间隔"), SerializeField]
 	private float time_interval;
+	[Header("每一次切换的数量"), SerializeField]
+	private int change_cot;
 
 	List<GameObject> clock_list = new List<GameObject>();
 	Queue<GameObject> broken_queue = new Queue<GameObject>();
@@ -19,13 +21,17 @@ public class Clock : MonoBehaviour
 	{
 		GameObject obj;
 
-		obj = waiting_queue.Dequeue();
-		obj.GetComponent<ClockNode>().Disable();
-		broken_queue.Enqueue(obj);
+		for(int i = 0; i < change_cot; i++)
+		{
+			obj = waiting_queue.Dequeue();
+			obj.GetComponent<ClockNode>().Disable();
+			broken_queue.Enqueue(obj);
 
-		obj = broken_queue.Dequeue();
-		obj.GetComponent<ClockNode>().Enable();
-		waiting_queue.Enqueue(obj);
+			obj = broken_queue.Dequeue();
+			obj.GetComponent<ClockNode>().Enable();
+			waiting_queue.Enqueue(obj);
+		}
+
 	}
 
 	#region Generate
@@ -113,20 +119,10 @@ public class Clock : MonoBehaviour
 
 	private void Awake()
 	{
-		int i = 0;
-		while (true)
+		for (int i = 0; i < transform.childCount; i++)
 		{
-			string name = "Node_" + i;
-			Transform trans = transform.Find(name);
-			if(trans != null)
-			{
-				clock_list.Add(trans.gameObject);
-				i++;
-			}
-			else
-			{
-				break;
-			}
+			Transform trans = transform.GetChild(i);
+			clock_list.Add(trans.gameObject);
 		}
 	}
 
@@ -137,6 +133,7 @@ public class Clock : MonoBehaviour
 		{
 			it.MoveNext();
 			broken_queue.Enqueue(it.Current);
+			//it.Current.GetComponent<ClockNode>().Disable();
 			it.Current.SetActive(false);
 		}
 		while(it.MoveNext())
