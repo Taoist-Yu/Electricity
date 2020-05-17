@@ -453,11 +453,11 @@ namespace Player
 			}
 
 			//设置人物朝向 
-			if(hVelocity > 0)
+			if(hInput > 0)
 			{
 				spriteRenderer.flipX = true;
 			}
-			if (hVelocity < 0)
+			if (hInput < 0)
 			{
 				spriteRenderer.flipX = false;
 			}

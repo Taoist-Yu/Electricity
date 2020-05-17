@@ -32,6 +32,15 @@ public class GameManager : MonoBehaviour
 		pre_black = Resources.Load<GameObject>("Prefabs/LevelMask");
 	}
 
+	private void Update()
+	{
+		//接受esc输入
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			EscInput();
+;		}
+	}
+
 	public void LoadScene()
 	{
 		StartLevelMask();
@@ -58,6 +67,7 @@ public class GameManager : MonoBehaviour
 		{
 			PlayScene.Instance.isSelectLevel = false;
 			SceneManager.LoadScene(0);
+			return;
 		}
 		//带开始界面的第一关转化成不带开始界面的第一关
 		if (currentLevel == 1)
@@ -72,6 +82,21 @@ public class GameManager : MonoBehaviour
 		{
 			++currentLevel;
 			SceneManager.LoadScene(0);
+		}
+	}
+
+	private void EscInput()
+	{
+		if (SceneManager.GetActiveScene().name == "SelectLevel")
+		{
+			SelectLevelUI ui = GameObject.Find("SelectPanel").GetComponent<SelectLevelUI>();
+			ui.OpenPanel(ui.transform.Find("RootPanel").gameObject);
+		} 
+		else
+		{
+			PlayScene.Instance.isSelectLevel = true;
+			GameManager.Instance.currentLevel = 1;
+			GameManager.Instance.LoadScene();
 		}
 	}
 

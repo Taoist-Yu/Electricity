@@ -35,7 +35,8 @@ public class ChargingPile : MonoBehaviour
 	private void CheckBelt()
 	{
 		//向下射线检测
-		RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.down);
+		//RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.down, 1.0f);
+		RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, new Vector2(1.0f, .2f), 0, Vector2.down, 1.0f);
 		//遍历检测结果，查找其中是否由传送带
 		Belt belt = null;
 		foreach(var hit in hits)

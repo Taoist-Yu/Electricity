@@ -8,7 +8,7 @@ public class Belt : MonoBehaviour
 	public Sprite[] m_sprites;
 	public Sprite[] r_sprites;
 
-	[SerializeField]
+	//[SerializeField]
 	private List<SpriteRenderer> nodes = new List<SpriteRenderer>();
 
 	[SerializeField]

@@ -27,6 +27,17 @@ class SelectLevelButton : MonoBehaviour
 		m_button.onClick.AddListener(LoadLevel);
 	}
 
+	//监听输入
+	private void Update()
+	{
+		KeyCode keycode = m_text.text[7] - '0' + KeyCode.Alpha0;
+		if (Input.GetKeyDown(keycode))
+		{
+			LoadLevel();
+
+		}
+	}
+
 	#endregion
 
 	private void LoadLevel()
