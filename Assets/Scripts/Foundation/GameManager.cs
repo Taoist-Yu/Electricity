@@ -69,11 +69,11 @@ public class GameManager : MonoBehaviour
 			SceneManager.LoadScene(0);
 			return;
 		}
-		//带开始界面的第一关转化成不带开始界面的第一关
-		if (currentLevel == 1)
-		{
-			currentLevel = 3;
-		}
+		////带开始界面的第一关转化成不带开始界面的第一关
+		//if (currentLevel == 1)
+		//{
+		//	currentLevel = 3;
+		//}
 		if (PlayScene.Instance.isOver)
 		{
 			SceneManager.LoadScene(0);

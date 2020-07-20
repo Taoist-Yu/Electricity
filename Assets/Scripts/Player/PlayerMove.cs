@@ -41,6 +41,7 @@ namespace Player
 		{
 			down, left, right, up,
 			ldown, rdown,
+			lup,rup,
 			dleft,uleft,dright,uright,
 			TABLE_LENGTH
 		}
@@ -100,6 +101,14 @@ namespace Player
 				case RayIndexTable.rdown:
 					origin = Vector2.right * rayInfo.width * 0.3f + Vector2.down * rayInfo.down;
 					direction = Vector2.down;
+					break;
+				case RayIndexTable.lup:
+					origin = Vector2.left * rayInfo.width * 0.3f + Vector2.up * rayInfo.down;
+					direction = Vector2.up;
+					break;
+				case RayIndexTable.rup:
+					origin = Vector2.right * rayInfo.width * 0.3f + Vector2.up * rayInfo.down;
+					direction = Vector2.up;
 					break;
 				case RayIndexTable.TABLE_LENGTH:
 					Debug.LogError("不允许传入TABLE_LENGTH");
@@ -208,6 +217,12 @@ namespace Player
 			//判断玩家是否在地面上
 			this.isGround = false;
 			
+			//玩家在上升中，不予判断
+			if(vVelocity > 0)
+			{
+				return;
+			}
+
 			foreach (var hit in hits[(int)RayIndexTable.down])
 			{
 				if (hit.collider.isTrigger == false && hit.transform != transform)
@@ -334,7 +349,11 @@ namespace Player
 
 
 			//判断玩家头顶是否有东西
-			foreach(var hit in hits[(int)RayIndexTable.up])
+			List<RaycastHit2D> uphits = new List<RaycastHit2D>();
+			uphits.AddRange(hits[(int)RayIndexTable.up]);
+			uphits.AddRange(hits[(int)RayIndexTable.lup]);
+			uphits.AddRange(hits[(int)RayIndexTable.rup]);
+			foreach (var hit in uphits)
 			{
 				//玩家会被碰撞体挡住
 				if(hit.collider.isTrigger == false && hit.transform != transform)

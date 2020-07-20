@@ -35,6 +35,14 @@ public class LightningMono : MonoBehaviour
 				this.CollectVertex(start, end);
 			}
 		}
+		//将所有顶点的Z坐标前置，防止线被遮挡
+		for(int i = 0; i < nodeArray.Length; i++)
+		{
+			Vector3 pos = posList[i];
+			pos.z = -1;
+			posList[i] = pos;
+		}
+
 
 		//更新LineRender的顶点数组
 		lineRenderer.positionCount = posList.Count;
